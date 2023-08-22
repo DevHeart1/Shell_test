@@ -1,10 +1,4 @@
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-
+#include "shell.h"
 
 /**
  * count_token - Counts the tokenized inputs
