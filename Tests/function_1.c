@@ -6,10 +6,10 @@ int contains_path(char *exec)
 	{
 		if (exec[q] == '/')
 		{
-			return 1;
+			return (1);
 		}
 	}
-	return 0;
+	return (0);
 }
 
 char *get_full_path(char *exec, char *path_token)
@@ -23,7 +23,7 @@ char *get_full_path(char *exec, char *path_token)
 	strcpy(fullpath, path_token);
 	strcat(fullpath, "/");
 	strcat(fullpath, exec);
-	return fullpath;
+	return (fullpath);
 }
 
 char *search_executable_in_path(char *exec, char *path_value)
@@ -46,7 +46,7 @@ char *search_executable_in_path(char *exec, char *path_value)
 	}
 
 	free(path_copy);
-	return fullpath;
+	return (fullpath);
 }
 
 int executes_commands(char **av)
@@ -80,7 +80,7 @@ int executes_commands(char **av)
 			perror(exec);
 			exit(EXIT_FAILURE);
 		}
+		
 	}
-
 	return 0;
 }
