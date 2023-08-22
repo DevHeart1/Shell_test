@@ -36,3 +36,20 @@ int count_token(char *input)
 	}
 	return Tcount;
 }
+
+/**
+ * _memcpy - copies data to another pointer with casts
+ * @dest: dest to paste data
+ * @src: source to copy data from
+ * @size: length of data to copy
+ * Return: nothing
+ */
+void _memcpy(void *dest, const void *src, unsigned int size)
+{
+	char *ptr = (char *)src;
+	char *new = (char *)dest;
+	unsigned int i;
+
+	for (i = 0; i < size; i++)
+		new[i] = ptr[i];
+}
