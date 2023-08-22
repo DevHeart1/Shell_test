@@ -78,7 +78,7 @@ int main(int ac, char *av[])
 
 		ssize_t readline = getline(&buff, &length, stdin);
 
-		if (readline == EOF || readline == -1)
+		if (readline == EOF)
 		{
 			perror("Error reading input");
 			break;
