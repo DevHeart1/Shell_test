@@ -62,6 +62,7 @@ int main(int ac, char *av[])
 		}
 		free(av);
 		free(buffCopy);
+		display_Prompt();
 	}
 	free(buff);
 	exit(0);
