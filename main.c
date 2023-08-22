@@ -19,7 +19,9 @@ int main(int ac, char *av[])
 		display_Prompt();
 		ssize_t readline = getline(&buff, &length, stdin);
 		if (readline == EOF)
+		{
 			break;
+		}
 		buff[readline - 1] = '\0';
 		buffCopy = strdup(buff);
 
