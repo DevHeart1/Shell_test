@@ -1,9 +1,4 @@
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/wait.h>
+#include "shell.h"
 
 /**
  * Tokenize_Input - Function that tokenize inputs from user
