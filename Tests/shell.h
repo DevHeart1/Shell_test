@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+extern char **environ;
 void Tokenize_Input(char *input, char **av, int count);
 void display_Prompt(void);
 int count_token(char *input);
@@ -18,6 +19,7 @@ void process_input(char *buff);
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, const char *src);
 size_t _strlen(const char *s);
+char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 void _memcpy(void *dest, const void *src, unsigned int size);
