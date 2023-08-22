@@ -2,7 +2,7 @@
 
 void Tokenize_Input(char *input, char **av, int count)
 {
-	int q;
+	int q, m, Index;
 	char *Token = strtok(input, " ");
 
 	for (q = 0; q < count; q++)
@@ -10,6 +10,10 @@ void Tokenize_Input(char *input, char **av, int count)
 		av[q] = malloc(strlen(Token) + 1);
 		if (!av[q])
 		{
+			for (m = 0; m < q; m++)
+			{
+                		free(av[m]);
+            		}
             	perror("Memory allocation failed");
             	exit(EXIT_FAILURE);
         	}
@@ -17,6 +21,11 @@ void Tokenize_Input(char *input, char **av, int count)
 		Token = strtok(NULL, " ");
 	}
 	av[count] = NULL;
+	for (Index = 0; Index < count; Index++)
+	{
+        	free(av[Index]);
+    	}
+	free(av);
 }
 
 void display_Prompt(void)
