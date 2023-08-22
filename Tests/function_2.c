@@ -70,12 +70,6 @@ int main(int ac, char *av[])
 			}
 			display_Prompt();
 		}
-		else if(!isatty(STDIN_FILENO)) 
-		{
-			if (Newline)
-				write(STDOUT_FILENO, "\n", sizeof("\n") - 1);
-		}
-
 		ssize_t readline = getline(&buff, &length, stdin);
 
 		if (readline == EOF)
