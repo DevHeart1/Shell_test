@@ -62,7 +62,7 @@ int main(int ac, char *av[])
 		}
 		free(av);
 		free(buffCopy);
-		display_Prompt();
+		second_Prompt();
 	}
 	free(buff);
 	exit(0);
