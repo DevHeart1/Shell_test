@@ -13,7 +13,7 @@
 
 void display_Prompt(void)
 {
-	char prompt[] = "#cisfun$";
+	char prompt[] = "#cisfun$ ";
 
 	write(STDOUT_FILENO, prompt, strlen(prompt));
 }

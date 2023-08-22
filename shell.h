@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include  <sys/stat.h>
 
 int count_token(char *input);
 void Tokenize_Input(char *input, char **av, int count);

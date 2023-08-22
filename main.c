@@ -8,8 +8,6 @@
  * Return: (0) on success
  */
 
-#include "shell.h"
-
 int main(int ac, char *av[])
 {
 	char *buff = NULL, *buffCopy = NULL;
@@ -20,27 +18,44 @@ int main(int ac, char *av[])
 	{
 		display_Prompt();
 		ssize_t readline = getline(&buff, &length, stdin);
-		if (readline == EOF) break;
+		if (readline == EOF)
+			break;
 		buff[readline - 1] = '\0';
 
 		buffCopy = strdup(buff);
-		if (!buffCopy) { perror("Memory Allocation failed"); return (-1); }
-
+		if (strcmp(buff, "exit") == 0)
+		{
+			free(buffCopy);
+			break;
+		}
+		if (!buffCopy)
+		{
+			perror("Memory Allocation failed");
+			return (-1);
+		}
 		int Count_Token = count_token(buffCopy);
 		char **av = malloc(sizeof(char *) * (Count_Token + 1));
-		if (!av) { perror("Memory Allocation failed"); return (-1); }
 
+		if (!av)
+		{
+			perror("Memory Allocation failed");
+			return (-1);
+		}
 		Tokenize_Input(buff, av, Count_Token);
 		pid_t pidv = fork();
-		if (pidv < 0) perror("Error creating child process");
-		else if (pidv == 0) executes_commands(av);
-		else { int status; wait(&status); }
 
+		if (pidv < 0)
+			perror("Error creating child process");
+		else if (pidv == 0)
+			executes_commands(av);
+		else
+		{
+			int status;
+			wait(&status);
+		}
 		free(av);
 		free(buffCopy);
 	}
-
 	free(buff);
-	return (0);
+	exit(0);
 }
-
