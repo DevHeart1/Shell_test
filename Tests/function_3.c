@@ -7,13 +7,13 @@ void Tokenize_Input(char *input, char **av, int count)
 
 	for (q = 0; q < count; q++)
 	{
-		av[q] = malloc(strlen(Token) + 1);
+		av[q] = malloc(_strlen(Token) + 1);
 		if (!av[q])
 		{
             	perror("Memory allocation failed");
             	exit(EXIT_FAILURE);
         	}
-		strcpy(av[q], Token);
+		_strcpy(av[q], Token);
 		Token = strtok(NULL, " ");
 	}
 	av[count] = NULL;
@@ -22,7 +22,7 @@ void Tokenize_Input(char *input, char **av, int count)
 void display_Prompt(void)
 {
 	char prompt[] = "#cisfun$ ";
-	write(STDOUT_FILENO, prompt, strlen(prompt));
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
 }
 
 int count_token(char *input)
