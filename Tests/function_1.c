@@ -14,21 +14,21 @@ int contains_path(char *exec)
 
 char *get_full_path(char *exec, char *path_token)
 {
-	char *fullpath = malloc(strlen(path_token) + strlen(exec) + 2);
+	char *fullpath = malloc(_strlen(path_token) + _strlen(exec) + 2);
 	if (!fullpath)
 	{
 		perror("Memory Allocation failed");
 		exit(EXIT_FAILURE);
 	}
-	strcpy(fullpath, path_token);
-	strcat(fullpath, "/");
-	strcat(fullpath, exec);
+	_strcpy(fullpath, path_token);
+	_strcat(fullpath, "/");
+	_strcat(fullpath, exec);
 	return (fullpath);
 }
 
 char *search_executable_in_path(char *exec, char *path_value)
 {
-	char *path_copy = strdup(path_value);
+	char *path_copy = _strdup(path_value);
 	char *path_token = strtok(path_copy, ":");
 	char *fullpath = NULL;
 
@@ -63,7 +63,7 @@ int executes_commands(char **av)
 	}
 	else
 	{
-		char *path_value = getenv("PATH");
+		char *path_value = _getenv("PATH");
 		char *fullpath = search_executable_in_path(exec, path_value);
 
 		if (fullpath)
