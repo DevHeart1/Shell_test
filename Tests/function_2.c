@@ -23,15 +23,15 @@ void handle_child_process(pid_t pidv, char **av)
 
 void process_input(char *buff)
 {
-	buff[strlen(buff) - 1] = '\0';
-	char *buffCopy = strdup(buff);
+	buff[_strlen(buff) - 1] = '\0';
+	char *buffCopy = _strdup(buff);
 	if (!buffCopy)
 	{
 		perror("Memory Allocation failed");
 		exit(-1);
 	}
 
-	if (strcmp(buffCopy, "exit") == 0)
+	if (_strcmp(buffCopy, "exit") == 0)
 	{
 		free(buffCopy);
 		exit(0);
