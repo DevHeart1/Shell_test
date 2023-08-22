@@ -80,7 +80,6 @@ int main(int ac, char *av[])
 
 		if (readline == EOF)
 		{
-			perror("Error reading input");
 			break;
 		}
 
