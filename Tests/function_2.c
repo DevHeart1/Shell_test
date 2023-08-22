@@ -70,7 +70,7 @@ int main(int ac, char *av[])
 			}
 			display_Prompt();
 		}
-		else 
+		else if(!isatty(STDIN_FILENO)) 
 		{
 			if (Newline)
 				write(STDOUT_FILENO, "\n", sizeof("\n") - 1);
