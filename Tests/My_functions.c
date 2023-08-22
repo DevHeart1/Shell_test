@@ -64,3 +64,22 @@ int _strcmp(char *s1, char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
+
+/**
+ * my_strdup - duplicates a string, allocating the appropriate size to the copy
+ * @str: to be duplicated
+ *
+ * Return: pointer to the duplicated string
+ */
+char *_strdup(char *str)
+{
+	char *dup;
+	size_t len;
+
+	len = my_strlen(str);
+	dup = malloc(sizeof(char) * (len + 1));
+	if (dup == NULL)
+		return (NULL);
+	my_memcpy(dup, str, len + 1);
+	return (dup);
+}
