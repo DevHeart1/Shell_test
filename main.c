@@ -21,8 +21,8 @@ int main(int ac, char *av[])
 		if (readline == EOF)
 			break;
 		buff[readline - 1] = '\0';
-
 		buffCopy = strdup(buff);
+
 		if (strcmp(buff, "exit") == 0)
 		{
 			free(buffCopy);
@@ -47,11 +47,16 @@ int main(int ac, char *av[])
 		if (pidv < 0)
 			perror("Error creating child process");
 		else if (pidv == 0)
+		{
 			executes_commands(av);
+
+			exit(EXIT_FAILURE);
+		}
 		else
 		{
 			int status;
-			wait(&status);
+			if (wait(&status) == -1)
+				perror("Error waiting for child process");
 		}
 		free(av);
 		free(buffCopy);
