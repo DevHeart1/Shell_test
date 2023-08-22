@@ -53,3 +53,35 @@ void _memcpy(void *dest, const void *src, unsigned int size)
 	for (i = 0; i < size; i++)
 		new[i] = ptr[i];
 }
+
+/**
+ * _getenv - gets an environment variable
+ * @name: name of the environment variable
+ * Return: pointer to the value of the environment variable
+ * or NULL if there is no match
+*/
+
+char *_getenv(const char *name)
+{
+    char **env;
+    char *env_name, *delimeter;
+    size_t name_len;
+
+    if (name == NULL || name[0] == '\0')
+        return (NULL);
+    for (env = environ; *env != NULL; env++)
+    {
+        env_name = *env;
+        delimeter = _strchr(env_name, '=');
+
+        if (delimeter != NULL)
+        {
+            name_len = (size_t)(delimeter - env_name);
+            if (_strlen(name) == name_len && _strncmp(env_name, name, name_len) == 0)
+            {
+                return (delimeter + 1);
+            }
+        }
+    }
+    return (NULL);
+}
