@@ -17,3 +17,9 @@ void display_Prompt(void)
 
 	write(STDOUT_FILENO, prompt, strlen(prompt));
 }
+void second_Prompt(void)
+{
+	char prompt[] = "#cisfun$ \n";
+
+	write(STDOUT_FILENO, prompt, strlen(prompt));
+}
