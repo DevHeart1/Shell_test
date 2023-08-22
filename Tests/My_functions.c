@@ -76,10 +76,10 @@ char *_strdup(char *str)
 	char *dup;
 	size_t len;
 
-	len = my_strlen(str);
+	len = _strlen(str);
 	dup = malloc(sizeof(char) * (len + 1));
 	if (dup == NULL)
 		return (NULL);
-	my_memcpy(dup, str, len + 1);
+	_memcpy(dup, str, len + 1);
 	return (dup);
 }
