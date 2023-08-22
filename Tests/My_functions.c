@@ -66,7 +66,7 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * my_strdup - duplicates a string, allocating the appropriate size to the copy
+ * _strdup - duplicates a string, allocating the appropriate size to the copy
  * @str: to be duplicated
  *
  * Return: pointer to the duplicated string
