@@ -1,9 +1,4 @@
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/wait.h>
+#include "shell.h"
 
 /**
  * display_Prompt - This function prints prompt to stdout
@@ -17,7 +12,7 @@ void display_Prompt(void)
 
 	write(STDOUT_FILENO, prompt, strlen(prompt));
 }
-void second_Prompt(void)
+void display_Promptsec(void)
 {
 	char prompt[] = "#cisfun$ \n";
 
