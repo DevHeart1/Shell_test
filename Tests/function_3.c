@@ -10,10 +10,6 @@ void Tokenize_Input(char *input, char **av, int count)
 		av[q] = malloc(strlen(Token) + 1);
 		if (!av[q])
 		{
-			for (m = 0; m < q; m++)
-			{
-                		free(av[m]);
-            		}
             	perror("Memory allocation failed");
             	exit(EXIT_FAILURE);
         	}
