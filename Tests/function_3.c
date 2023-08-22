@@ -21,10 +21,7 @@ void Tokenize_Input(char *input, char **av, int count)
 		Token = strtok(NULL, " ");
 	}
 	av[count] = NULL;
-	for (Index = 0; Index < count; Index++)
-	{
-        	free(av[Index]);
-    	}
+
 	free(av);
 }
 
