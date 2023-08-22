@@ -2,7 +2,7 @@
 
 void Tokenize_Input(char *input, char **av, int count)
 {
-	int q, m, Index;
+	int q;
 	char *Token = strtok(input, " ");
 
 	for (q = 0; q < count; q++)
@@ -17,8 +17,6 @@ void Tokenize_Input(char *input, char **av, int count)
 		Token = strtok(NULL, " ");
 	}
 	av[count] = NULL;
-
-	free(av);
 }
 
 void display_Prompt(void)
