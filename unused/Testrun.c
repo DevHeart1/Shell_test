@@ -154,13 +154,20 @@ int main(int ac, char *av[])
 
 	while (1)
 	{
-		display_Prompt();
+		if (isatty(STDIN_FILENO))
+		{
+			display_Prompt();
+		}
 		ssize_t readline = getline(&buff, &length, stdin);
 		if (readline == EOF)
 			break;
 		buff[readline - 1] = '\0';
-
 		buffCopy = strdup(buff);
+
+		if (strcmp(buff, "exit"))
+		{
+			free(buffcopy);
+		}
 		if (!buffCopy)
 		{
 			perror("Memory Allocation failed");
@@ -192,5 +199,5 @@ int main(int ac, char *av[])
 	}
 
 	free(buff);
-	return (0);
+	exit(0);
 }
