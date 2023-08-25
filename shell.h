@@ -13,5 +13,7 @@ int count_token(char *input);
 void Tokenize_Input(char *input, char **av, int count);
 void display_Prompt(void);
 int executes_commands(char **av);
+void Display_Environ_var(void);
+
 
 #endif

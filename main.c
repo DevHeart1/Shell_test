@@ -84,6 +84,9 @@ int main(int ac, char *av[]) {
 		Newline = 1;
 	}
 
+	Display_Environ_Var();
+	return (0);
+
 	free(buff);
 	exit(0);
 }
