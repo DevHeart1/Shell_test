@@ -19,7 +19,7 @@ char *_strtok(char *str, const char *delimiters)
 	if (end_str == NULL)
 		return (NULL);
 
-	while (*end_str != '\0' && strchr(delimiters, *end_str) != NULL)
+	while (*end_str != '\0' && _strchr(delimiters, *end_str) != NULL)
 		end_str++;
 
 	if (end_str == '\0')
@@ -28,7 +28,7 @@ char *_strtok(char *str, const char *delimiters)
 		return (NULL);
 	}
 
-	while (*end_str != '\0' && strchr(delimiters, *end_str) == NULL)
+	while (*end_str != '\0' && _strchr(delimiters, *end_str) == NULL)
 		end_str++;
 
 	if (*end_str != '\0')
