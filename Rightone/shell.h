@@ -29,4 +29,9 @@ char *_strchr(const char *str, int c);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strtok(char *str, const char *delimiters);
 
+/*FOr print error*/
+int _putchar(char c);
+void _puts(char *str);
+void _error(char *prog, int count, char *cmd);
+
 #endif
