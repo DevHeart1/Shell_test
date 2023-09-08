@@ -13,9 +13,9 @@ extern char **environ;
 void Tokenize_Input(char *input, char **av, int count);
 void display_Prompt(void);
 int count_token(char *input);
-int executes_commands(char **av);
-void handle_child_process(pid_t pidv, char **av);
-void process_input(char *buff);
+int executes_commands(char **av, char *argv);
+void handle_child_process(pid_t pidv, char **av, char *argv);
+void process_input(char *buff, char *argv);
 
 /*Shell Utilities*/
 char *_strcat(char *dest, const char *src);

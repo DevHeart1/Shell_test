@@ -41,7 +41,7 @@ void _error(char *prog, int count, char *cmd)
 {
 	_puts(prog);
 	_puts(": ");
-	_putchar(count);
+	_putchar('0' + count);
 	_puts(": ");
 	_puts(cmd);
 	_puts(": not found\n");

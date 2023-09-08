@@ -75,7 +75,7 @@ char *search_executable_in_path(char *exec, char *path_value)
  *
  * Return: Always returns 0.
  */
-int executes_commands(char **av)
+int executes_commands(char **av, char *argv)
 {
 	char *exec = av[0];
 	int count = 1;
@@ -84,7 +84,7 @@ int executes_commands(char **av)
 	{
 		if (execve(exec, av, environ) == -1)
 		{
-			_error(av[0], count, av[1]);
+			_error(argv, count, exec);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -97,14 +97,14 @@ int executes_commands(char **av)
 		{
 			if (execve(fullpath, av, environ) == -1)
 			{
-				_error(av[0], count, fullpath);
+				_error(argv, count, fullpath);
 				exit(EXIT_FAILURE);
 			}
 			free(fullpath);
 		}
 		else
 		{
-			_error(av[0], count, av[1]);
+			_error(argv, count, exec);
 			exit(EXIT_FAILURE);
 		}
 	}

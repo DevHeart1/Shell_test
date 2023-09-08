@@ -5,7 +5,7 @@
  * @pidv: PID of the child process
  * @av: Array of command arguments
  */
-void handle_child_process(pid_t pidv, char **av)
+void handle_child_process(pid_t pidv, char **av, char *argv)
 {
 	if (pidv < 0)
 	{
@@ -13,7 +13,7 @@ void handle_child_process(pid_t pidv, char **av)
 	}
 	else if (pidv == 0)
 	{
-		executes_commands(av);
+		executes_commands(av, argv);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -31,7 +31,7 @@ void handle_child_process(pid_t pidv, char **av)
  * process_input - Process user input
  * @buff: User input buffer
  */
-void process_input(char *buff)
+void process_input(char *buff, char *argv)
 {
 	int q, Count_Token;
 	char **av;
@@ -62,7 +62,7 @@ void process_input(char *buff)
 
 	Tokenize_Input(buff, av, Count_Token);
 	pidv = fork();
-	handle_child_process(pidv, av);
+	handle_child_process(pidv, av, argv);
 	
 	for (q = 0; q < Count_Token; q++)
 	{
@@ -97,7 +97,7 @@ int main(int ac, char *av[])
 		{
 			break;
 		}
-		process_input(buff);
+		process_input(buff, av[0]);
 	}
 
 	free(buff);
