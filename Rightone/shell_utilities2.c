@@ -91,6 +91,10 @@ char *_strtok(char *str, const char *delimiters)
 	while (*begin != '\0' && _strchr(delimiters, *begin) != NULL)
 		begin++;
 
+	if (*begin == '\0')
+		return (NULL);
+
+
 	Token_beginning = begin;
 
 	while (*begin != '\0' && _strchr(delimiters, *begin) == NULL)

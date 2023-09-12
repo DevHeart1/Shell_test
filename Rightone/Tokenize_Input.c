@@ -9,13 +9,13 @@
 void Tokenize_Input(char *input, char **av, int count)
 {
     int q;
-    char *Token = strtok(input, " ");
+    char *Token = _strtok(input, " ");
 
     for (q = 0; q < count; q++)
     {
         av[q] = malloc(_strlen(Token) + 1);
         _strcpy(av[q], Token);
-        Token = strtok(NULL, " ");
+        Token = _strtok(NULL, " ");
     }
     av[count] = NULL;
 }
@@ -37,11 +37,11 @@ void display_Prompt(void)
 int count_token(char *input)
 {
     int Tcount = 0;
-    char *token = strtok(input, " ");
+    char *token = _strtok(input, " ");
     while (token != NULL)
     {
         Tcount++;
-        token = strtok(NULL, " ");
+        token = _strtok(NULL, " ");
     }
     return (Tcount);
 }
