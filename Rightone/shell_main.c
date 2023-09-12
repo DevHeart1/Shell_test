@@ -5,40 +5,56 @@
  * @pidv: PID of the child process
  * @av: Array of command arguments
  */
-void handle_child_process(pid_t pidv, char **av, char *argv)
+int handle_child_process(pid_t pidv, char **av, char *argv)
 {
-	if (pidv < 0)
-	{
-		perror("Error creating child process");
-	}
-	else if (pidv == 0)
-	{
-		executes_commands(av, argv);
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		int status;
+    if (pidv < 0)
+    {
+        perror("Error creating child process");
+        return (-1);
+    }
+    else if (pidv == 0)
+    {
+        int sta;
 
-		if (wait(&status) == -1)
-		{
-			perror("Error waiting for child process");
-		}
-	}
+        sta = executes_commands(av, argv);
+        exit(sta); /*Exit the child process with the status of executes_commands*/
+    }
+    else
+    {
+        int wait_status;
+
+        if (wait(&wait_status) == -1)
+        {
+            perror("Error waiting for child process");
+            return (-1);
+        }
+        /*Check if the child process exited normally*/
+        if (WIFEXITED(wait_status))
+        {
+            return WEXITSTATUS(wait_status); /*Return the exit status of the child process*/
+        }
+        else
+        {
+            /* Handle cases where the child process didn't exit normally*/
+            return (-1);
+        }
+    }
 }
+
 
 /**
  * process_input - Process user input
  * @buff: User input buffer
  */
-void process_input(char *buff, char *argv)
+int process_input(char *buff, char *argv)
 {
-	int q, Count_Token;
+	int q, Count_Token, status;
 	char **av;
+	char *buffCopy;
 	pid_t pidv;
 
 	buff[_strlen(buff) - 1] = '\0';
-	char *buffCopy = _strdup(buff);
+	buffCopy = _strdup(buff);
 
 	if (!buffCopy)
 	{
@@ -46,11 +62,7 @@ void process_input(char *buff, char *argv)
 		exit(-1);
 	}
 
-	if (_strcmp(buffCopy, "exit") == 0)
-	{
-		free(buffCopy);
-		exit(0);
-	}
+	builtin(buffCopy);
 
 	Count_Token = count_token(buffCopy);
 	av = malloc(sizeof(char *) * (Count_Token + 1));
@@ -62,14 +74,17 @@ void process_input(char *buff, char *argv)
 
 	Tokenize_Input(buff, av, Count_Token);
 	pidv = fork();
-	handle_child_process(pidv, av, argv);
 	
+	status = handle_child_process(pidv, av, argv);
+
+	printf("Third %d\n", status);
 	for (q = 0; q < Count_Token; q++)
 	{
 		free(av[q]);
 	}
 	free(av);
 	free(buffCopy);
+	return (status);
 }
 
 /**
@@ -80,8 +95,10 @@ void process_input(char *buff, char *argv)
  */
 int main(int ac, char *av[])
 {
+	int status, stv = 0;
 	char *buff = NULL;
 	size_t length = 0;
+	ssize_t readline;
 	(void)ac;
 
 	while (1)
@@ -91,15 +108,17 @@ int main(int ac, char *av[])
 			display_Prompt();
 		}
 
-		ssize_t readline = getline(&buff, &length, stdin);
+		readline = getline(&buff, &length, stdin);
 
 		if (readline == EOF)
 		{
 			break;
 		}
-		process_input(buff, av[0]);
-	}
+		status = process_input(buff, av[0]);
+		/*printf("Fourth %d\n", status);*/
+		return(status);
 
+	}
 	free(buff);
-	return (0);
+	return (stv);
 }

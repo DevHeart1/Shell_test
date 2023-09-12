@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -14,8 +15,9 @@ void Tokenize_Input(char *input, char **av, int count);
 void display_Prompt(void);
 int count_token(char *input);
 int executes_commands(char **av, char *argv);
-void handle_child_process(pid_t pidv, char **av, char *argv);
-void process_input(char *buff, char *argv);
+int handle_child_process(pid_t pidv, char **av, char *argv);
+int process_input(char *buff, char *argv);
+void builtin(char *buff);
 
 /*Shell Utilities*/
 char *_strcat(char *dest, const char *src);

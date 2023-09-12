@@ -8,7 +8,9 @@
  */
 int contains_path(char *exec)
 {
-	for (int q = 0; exec[q] != '\0'; q++)
+	int q;
+
+	for (q = 0; exec[q] != '\0'; q++)
 	{
 		if (exec[q] == '/')
 		{
@@ -51,11 +53,11 @@ char *search_executable_in_path(char *exec, char *path_value)
 	char *path_copy = _strdup(path_value);
 	char *path_token = strtok(path_copy, ":");
 	char *fullpath = NULL;
+	struct stat stv;
 
 	while (path_token != NULL)
 	{
 		fullpath = get_full_path(exec, path_token);
-		struct stat stv;
 		if (stat(fullpath, &stv) == 0)
 		{
 			break;
@@ -78,14 +80,14 @@ char *search_executable_in_path(char *exec, char *path_value)
 int executes_commands(char **av, char *argv)
 {
 	char *exec = av[0];
-	int count = 1;
+	int count = 1, status = 0, status_2 = 127;
 
 	if (contains_path(exec))
 	{
 		if (execve(exec, av, environ) == -1)
 		{
 			_error(argv, count, exec);
-			exit(EXIT_FAILURE);
+			return (status_2);
 		}
 	}
 	else
@@ -98,15 +100,16 @@ int executes_commands(char **av, char *argv)
 			if (execve(fullpath, av, environ) == -1)
 			{
 				_error(argv, count, fullpath);
-				exit(EXIT_FAILURE);
+				return (status_2);
 			}
 			free(fullpath);
 		}
 		else
 		{
 			_error(argv, count, exec);
-			exit(EXIT_FAILURE);
+			return (status_2);
 		}
 	}
-	return 0;
+	
+	return (status);
 }
