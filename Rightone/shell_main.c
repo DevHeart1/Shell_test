@@ -77,7 +77,7 @@ int process_input(char *buff, char *argv)
 	
 	status = handle_child_process(pidv, av, argv);
 
-	printf("Third %d\n", status);
+	/*printf("Third %d\n", status);*/
 	for (q = 0; q < Count_Token; q++)
 	{
 		free(av[q]);
@@ -115,9 +115,11 @@ int main(int ac, char *av[])
 			break;
 		}
 		status = process_input(buff, av[0]);
-		/*printf("Fourth %d\n", status);*/
-		return(status);
-
+		if (status != 0)
+		{
+			return (status);
+		}
+		continue;
 	}
 	free(buff);
 	return (stv);
