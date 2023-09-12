@@ -66,6 +66,7 @@ int process_input(char *buff, char *argv)
 
 	Count_Token = count_token(buffCopy);
 	av = malloc(sizeof(char *) * (Count_Token + 1));
+
 	if (!av)
 	{
 		perror("Memory Allocation failed");
@@ -77,7 +78,6 @@ int process_input(char *buff, char *argv)
 	
 	status = handle_child_process(pidv, av, argv);
 
-	/*printf("Third %d\n", status);*/
 	for (q = 0; q < Count_Token; q++)
 	{
 		free(av[q]);
@@ -117,9 +117,9 @@ int main(int ac, char *av[])
 		status = process_input(buff, av[0]);
 		if (status != 0)
 		{
-			return (status);
+			stv = status;
+			continue;
 		}
-		continue;
 	}
 	free(buff);
 	return (stv);

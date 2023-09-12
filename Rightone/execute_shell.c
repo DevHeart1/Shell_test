@@ -82,7 +82,11 @@ int executes_commands(char **av, char *argv)
 	char *exec = av[0];
 	int count = 1, status = 0, status_2 = 127;
 
-	if (contains_path(exec))
+	if (av[0] == NULL)
+	{
+			return (0);
+	}
+	else if (contains_path(exec))
 	{
 		if (execve(exec, av, environ) == -1)
 		{
@@ -110,6 +114,7 @@ int executes_commands(char **av, char *argv)
 			return (status_2);
 		}
 	}
+	
 	
 	return (status);
 }
