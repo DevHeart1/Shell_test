@@ -17,7 +17,7 @@ void builtin(char *buff)
 	else if (_strcmp(buff, "env") == 0)
 	{
 		if (!environ)
-			
+
 		if (isatty(1))
 		{
 			while (environ[idx] != NULL)
