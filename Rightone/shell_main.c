@@ -61,7 +61,6 @@ int process_input(char *buff, char *argv)
 		perror("Memory Allocation failed");
 		exit(-1);
 	}
-
 	builtin(buffCopy);
 
 	Count_Token = count_token(buffCopy);
@@ -72,12 +71,9 @@ int process_input(char *buff, char *argv)
 		perror("Memory Allocation failed");
 		exit(-1);
 	}
-
 	Tokenize_Input(buff, av, Count_Token);
 	pidv = fork();
-	
 	status = handle_child_process(pidv, av, argv);
-
 	for (q = 0; q < Count_Token; q++)
 	{
 		free(av[q]);
