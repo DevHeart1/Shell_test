@@ -5,7 +5,7 @@
  * @pidv: PID of the child process
  * @av: Array of command arguments
  */
-int handle_child_process(pid_t pidv, char **av, char *argv)
+int handle_child_process(pid_t pidv, char **av, char *argv, char *buff)
 {
     if (pidv < 0)
     {
@@ -16,7 +16,7 @@ int handle_child_process(pid_t pidv, char **av, char *argv)
     {
         int sta;
 
-        sta = executes_commands(av, argv);
+        sta = executes_commands(av, argv, buff);
         exit(sta); /*Exit the child process with the status of executes_commands*/
     }
     else
@@ -61,8 +61,6 @@ int process_input(char *buff, char *argv)
 		perror("Memory Allocation failed");
 		exit(-1);
 	}
-	builtin(buffCopy);
-
 	Count_Token = count_token(buffCopy);
 	av = malloc(sizeof(char *) * (Count_Token + 1));
 
@@ -73,7 +71,7 @@ int process_input(char *buff, char *argv)
 	}
 	Tokenize_Input(buff, av, Count_Token);
 	pidv = fork();
-	status = handle_child_process(pidv, av, argv);
+	status = handle_child_process(pidv, av, argv, buffCopy);
 	for (q = 0; q < Count_Token; q++)
 	{
 		free(av[q]);

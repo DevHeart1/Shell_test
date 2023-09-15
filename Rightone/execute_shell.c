@@ -66,7 +66,6 @@ char *search_executable_in_path(char *exec, char *path_value)
 		fullpath = NULL;
 		path_token = strtok(NULL, ":");
 	}
-
 	free(path_copy);
 	return fullpath;
 }
@@ -77,11 +76,12 @@ char *search_executable_in_path(char *exec, char *path_value)
  *
  * Return: Always returns 0.
  */
-int executes_commands(char **av, char *argv)
+int executes_commands(char **av, char *argv, char *buff)
 {
 	char *exec = av[0];
 	int count = 1, status = 0, status_2 = 127;
 
+	builtin(buff);
 	if (av[0] == NULL)
 	{
 			return (0);
@@ -113,8 +113,6 @@ int executes_commands(char **av, char *argv)
 			_error(argv, count, exec);
 			return (status_2);
 		}
-	}
-	
-	
+	}	
 	return (status);
 }

@@ -2,26 +2,35 @@
 
 void builtin(char *buff)
 {
-    int idx = 0;
-
-    if (_strcmp(buff, "exit") == 0)
+	if (_strcmp(buff, "exit") == 0)
 	{
-		free(buff);
 		exit(0);
 	}
 	else if (_strcmp(buff, "env") == 0)
 	{
-		if (!environ)
-
 		if (isatty(1))
 		{
-			while (environ[idx] != NULL)
-			{
-				write(1, environ[idx], _strlen(environ[idx]));
-				write(1, "\n", 1);
-
-				idx++;
-			}
+			_env();
 		}
 	}
+}
+
+int _env(void)
+{
+	int i;
+	char **_environ;
+
+	for (i = 0; environ[i]; i++)
+		;
+	_environ = malloc(sizeof(char *) * (i + 1));
+	for (i = 0; environ[i]; i++)
+		_environ[i] = _strdup(environ[i]);
+	_environ[i] = NULL;
+
+	for (i = 0; _environ[i]; i++)
+	{
+		write(STDOUT_FILENO, _environ[i], _strlen(_environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+	return (0);
 }
