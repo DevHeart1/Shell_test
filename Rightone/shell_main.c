@@ -4,47 +4,53 @@
  * handle_child_process - Handle child process execution
  * @pidv: PID of the child process
  * @av: Array of command arguments
+ * @argv: The program name
+ * @buff: The buffer for the getline
+ * Return: the return value of execve
  */
 int handle_child_process(pid_t pidv, char **av, char *argv, char *buff)
 {
-    if (pidv < 0)
-    {
-        perror("Error creating child process");
-        return (-1);
-    }
-    else if (pidv == 0)
-    {
-        int sta;
+	if (pidv < 0)
+	{
+		perror("Error creating child process");
+		return (-1);
+	}
+	else if (pidv == 0)
+	{
+		int sta;
 
-        sta = executes_commands(av, argv, buff);
-        exit(sta); /*Exit the child process with the status of executes_commands*/
-    }
-    else
-    {
-        int wait_status;
+		sta = executes_commands(av, argv, buff);
+		exit(sta); /*Exit the child process with the status of executes_commands*/
+	}
+	else
+	{
+		int wait_status;
 
-        if (wait(&wait_status) == -1)
-        {
-            perror("Error waiting for child process");
-            return (-1);
-        }
-        /*Check if the child process exited normally*/
-        if (WIFEXITED(wait_status))
-        {
-            return WEXITSTATUS(wait_status); /*Return the exit status of the child process*/
-        }
-        else
-        {
-            /* Handle cases where the child process didn't exit normally*/
-            return (-1);
-        }
-    }
+		if (wait(&wait_status) == -1)
+		{
+			perror("Error waiting for child process");
+			return (-1);
+		}
+		/*Check if the child process exited normally*/
+		if (WIFEXITED(wait_status))
+		{
+			return (WEXITSTATUS(wait_status));
+		/*Return the exit status of the child process*/
+		}
+		else
+		{
+			/* Handle cases where the child process didn't exit normally*/
+			return (-1);
+		}
+	}
 }
 
 
 /**
  * process_input - Process user input
  * @buff: User input buffer
+ * @argv: The program name
+ * Return: The return value of execve
  */
 int process_input(char *buff, char *argv)
 {

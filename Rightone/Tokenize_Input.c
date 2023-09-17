@@ -8,16 +8,16 @@
  */
 void Tokenize_Input(char *input, char **av, int count)
 {
-    int q;
-    char *Token = _strtok(input, " ");
+	int q;
+	char *Token = _strtok(input, " ");
 
-    for (q = 0; q < count; q++)
-    {
-        av[q] = malloc(_strlen(Token) + 1);
-        _strcpy(av[q], Token);
-        Token = _strtok(NULL, " ");
-    }
-    av[count] = NULL;
+	for (q = 0; q < count; q++)
+	{
+		av[q] = malloc(_strlen(Token) + 1);
+		_strcpy(av[q], Token);
+		Token = _strtok(NULL, " ");
+	}
+	av[count] = NULL;
 }
 
 /**
@@ -25,8 +25,9 @@ void Tokenize_Input(char *input, char **av, int count)
  */
 void display_Prompt(void)
 {
-    char prompt[] = "#cisfun$ ";
-    write(STDOUT_FILENO, prompt, _strlen(prompt));
+	char prompt[] = "#cisfun$ ";
+
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
 }
 
 /**
@@ -36,14 +37,15 @@ void display_Prompt(void)
  */
 int count_token(char *input)
 {
-    int Tcount = 0;
-    char *token = _strtok(input, " ");
-    while (token != NULL)
-    {
-        Tcount++;
-        token = _strtok(NULL, " ");
-    }
-    return (Tcount);
+	int Tcount = 0;
+	char *token = _strtok(input, " ");
+
+	while (token != NULL)
+	{
+		Tcount++;
+		token = _strtok(NULL, " ");
+	}
+	return (Tcount);
 }
 
 /**

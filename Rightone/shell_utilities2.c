@@ -52,7 +52,7 @@ char *_getenv(const char *name)
  * @str: The string to search
  * @c: The character to locate
  *
- * Return: Pointer to the first occurrence of the character 'c' in 
+ * Return: Pointer to the first occurrence of the character 'c' in
  * the string 'str'.
  */
 char *_strchr(const char *str, int c)
@@ -60,12 +60,12 @@ char *_strchr(const char *str, int c)
 	while (*str != '\0')
 	{
 		if (*str == c)
-			return (char *)str;
+			return ((char *)str);
 		str++;
 	}
 
 	if (c == '\0')
-		return (char *)str;
+		return ((char *)str);
 
 	return (NULL);
 }

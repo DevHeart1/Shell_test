@@ -14,10 +14,10 @@ int contains_path(char *exec)
 	{
 		if (exec[q] == '/')
 		{
-			return 1;
+			return (1);
 		}
 	}
-	return 0;
+	return (0);
 }
 
 /**
@@ -30,6 +30,7 @@ int contains_path(char *exec)
 char *get_full_path(char *exec, char *path_token)
 {
 	char *fullpath = malloc(_strlen(path_token) + _strlen(exec) + 2);
+
 	if (!fullpath)
 	{
 		perror("Memory Allocation failed");
@@ -38,11 +39,12 @@ char *get_full_path(char *exec, char *path_token)
 	_strcpy(fullpath, path_token);
 	_strcat(fullpath, "/");
 	_strcat(fullpath, exec);
-	return fullpath;
+	return (fullpath);
 }
 
 /**
- * search_executable_in_path - Search for an executable in the PATH environment variable.
+ * search_executable_in_path - Search for an executable in the
+ * PATH environment variable.
  * @exec: The name of the executable.
  * @path_value: The PATH environment variable value.
  *
@@ -67,13 +69,14 @@ char *search_executable_in_path(char *exec, char *path_value)
 		path_token = strtok(NULL, ":");
 	}
 	free(path_copy);
-	return fullpath;
+	return (fullpath);
 }
 
 /**
  * executes_commands - Execute a command with or without a path.
  * @av: An array of command arguments.
- *
+ * @argv: The program name from main
+ * @buff: The buffer for getline
  * Return: Always returns 0.
  */
 int executes_commands(char **av, char *argv, char *buff)
@@ -84,7 +87,7 @@ int executes_commands(char **av, char *argv, char *buff)
 	builtin(buff);
 	if (av[0] == NULL)
 	{
-			return (0);
+		return (0);
 	}
 	else if (contains_path(exec))
 	{
@@ -113,6 +116,6 @@ int executes_commands(char **av, char *argv, char *buff)
 			_error(argv, count, exec);
 			return (status_2);
 		}
-	}	
+	}
 	return (status);
 }

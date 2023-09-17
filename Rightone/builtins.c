@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * builtin - Check if a command is a built-in shell command.
+ * @buff: The command to check.
+ *
+ * Return: No return value.
+ */
 void builtin(char *buff)
 {
 	if (_strcmp(buff, "exit") == 0)
@@ -15,6 +21,13 @@ void builtin(char *buff)
 	}
 }
 
+/**
+ * _env - Print the environment variables.
+ *
+ * This function prints the environment variables to the standard output.
+ *
+ * Return: Always 0.
+ */
 int _env(void)
 {
 	int i;
@@ -22,7 +35,14 @@ int _env(void)
 
 	for (i = 0; environ[i]; i++)
 		;
+
 	_environ = malloc(sizeof(char *) * (i + 1));
+	if (_environ == NULL)
+	{
+		perror("malloc");
+		return (1);
+	}
+
 	for (i = 0; environ[i]; i++)
 		_environ[i] = _strdup(environ[i]);
 	_environ[i] = NULL;
@@ -32,5 +52,6 @@ int _env(void)
 		write(STDOUT_FILENO, _environ[i], _strlen(_environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}
+	free(_environ);
 	return (0);
 }
