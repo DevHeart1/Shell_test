@@ -2,17 +2,20 @@
 
 /**
  * builtin - Check if a command is a built-in shell command.
- * @buff: The command to check.
+ * @av: The command to check.
  *
  * Return: No return value.
  */
-void builtin(char *buff)
+void builtin(char **av)
 {
-	if (_strcmp(buff, "exit") == 0)
+	if (av == NULL || av[0] == NULL)
+		return;
+
+	else if (_strcmp(av[0], "exit") == 0)
 	{
-		exit(0);
+		execute_exit_command(av[1]);
 	}
-	else if (_strcmp(buff, "env") == 0)
+	else if (_strcmp(av[0], "env") == 0)
 	{
 		if (isatty(1))
 		{
@@ -54,4 +57,16 @@ int _env(void)
 	}
 	free(_environ);
 	return (0);
+}
+
+/**
+ * execute_exit_command - Execute the "exit" built-in command.
+ * @av: The exit argument (optional).
+ */
+void execute_exit_command(char *av)
+{
+	if (av == NULL)
+		is_exit("exit", NULL);
+	else
+		is_exit("exit", av);
 }

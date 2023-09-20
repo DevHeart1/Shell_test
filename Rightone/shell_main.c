@@ -5,10 +5,9 @@
  * @pidv: PID of the child process
  * @av: Array of command arguments
  * @argv: The program name
- * @buff: The buffer for the getline
  * Return: the return value of execve
  */
-int handle_child_process(pid_t pidv, char **av, char *argv, char *buff)
+int handle_child_process(pid_t pidv, char **av, char *argv)
 {
 	if (pidv < 0)
 	{
@@ -19,7 +18,7 @@ int handle_child_process(pid_t pidv, char **av, char *argv, char *buff)
 	{
 		int sta;
 
-		sta = executes_commands(av, argv, buff);
+		sta = executes_commands(av, argv);
 		exit(sta); /*Exit the child process with the status of executes_commands*/
 	}
 	else
@@ -67,6 +66,8 @@ int process_input(char *buff, char *argv)
 		perror("Memory Allocation failed");
 		exit(-1);
 	}
+	/*builtin(buffCopy);*/
+
 	Count_Token = count_token(buffCopy);
 	av = malloc(sizeof(char *) * (Count_Token + 1));
 
@@ -76,8 +77,9 @@ int process_input(char *buff, char *argv)
 		exit(-1);
 	}
 	Tokenize_Input(buff, av, Count_Token);
+	builtin(av);
 	pidv = fork();
-	status = handle_child_process(pidv, av, argv, buffCopy);
+	status = handle_child_process(pidv, av, argv);
 	for (q = 0; q < Count_Token; q++)
 	{
 		free(av[q]);

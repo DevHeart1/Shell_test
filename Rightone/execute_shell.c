@@ -76,15 +76,13 @@ char *search_executable_in_path(char *exec, char *path_value)
  * executes_commands - Execute a command with or without a path.
  * @av: An array of command arguments.
  * @argv: The program name from main
- * @buff: The buffer for getline
  * Return: Always returns 0.
  */
-int executes_commands(char **av, char *argv, char *buff)
+int executes_commands(char **av, char *argv)
 {
 	char *exec = av[0];
 	int count = 1, status = 0, status_2 = 127;
 
-	builtin(buff);
 	if (av[0] == NULL)
 	{
 		return (0);

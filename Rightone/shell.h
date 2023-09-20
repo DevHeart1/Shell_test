@@ -16,10 +16,11 @@ extern char **environ;
 void Tokenize_Input(char *input, char **av, int count);
 void display_Prompt(void);
 int count_token(char *input);
-int executes_commands(char **av, char *argv, char *buff);
-int handle_child_process(pid_t pidv, char **av, char *argv, char *buff);
+int executes_commands(char **av, char *argv);
+int handle_child_process(pid_t pidv, char **av, char *argv);
 int process_input(char *buff, char *argv);
-void builtin(char *buff);
+
+void builtin(char **av);
 int _env(void);
 
 /*Shell Utilities*/
@@ -39,4 +40,11 @@ int _putchar(char c);
 void _puts(char *str);
 void _error(char *prog, int count, char *cmd);
 
+
+void is_exit(char *token, char *status);
+void execute_exit_command(char *av);
+int _isdigit(int c);
+int _atoi(char *s);
+void illegal_status(char *argv, int command_num, char *status);
+char *int_convert_string(int number);
 #endif
